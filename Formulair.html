@@ -30,7 +30,7 @@
                     </tr>
                     <tr>
                         <td><b>nom / prénom</b>
-                        <td> <input id="c1" type=text name=nom size=50 maxlength=80 onchange="verifierNom()">
+                        <td> <input id="c1" type=text name=nom size=50 maxlength=80 onclick="verifierNom()">
                         <td id="t2"></td>
                     </tr>
                     <tr>
@@ -41,20 +41,20 @@
                     </tr>
                     <tr>
                         <td><b>no postal / localité</b>
-                        <td> <input id="c3" type=text name=no_postal size=5 maxlength=4 onchange="verifierPostal()">
+                        <td> <input id="c3" type=text name=no_postal size=5 maxlength=4 onclick="verifierPostal()">
                             <input id="c4" type=text name=localite size=20 maxlength=80 value>
                         <td id="t4"></td>
                     </tr>
                     <tr>
                         <td><b>pays</b>
                         <td>
-                            <select id="lepays" name=pays onclick="myFunction()">
-                                <option>tunisie
-                                <option>algérie
-                                <option selected>maroc
+                            <select id="lepays" name=pays >
+                                <option>tunisie</option>
+                                <option>algérie</option>
+                                <option selected>maroc</option>
                             </select>
-
-                            <button id="c4" type="button" onclick="myFunction()">ajouter pays</button>
+                            <b>Ajouter pays</b>
+                            
                             <input id="c5" type=text name=monpays size=20 maxlength=80 value="libye">
                             <button id="c4" type="button" onclick="myFunction()">ajouter pays</button>
                         <td>
@@ -93,16 +93,13 @@
             <table border="0" cellspacing="0" cellpadding="10" width="95%">
                 <tr>
                     <th>
-                        <input type=button value="  soumettre formulaire  " onclick=afficher()>
-                        <input type=button value="  vérification formulaire " onclick=forme()>
+                        <input type=button value="  soumettre formulaire  " onclick="afficher()">
+                        <input type=button value="  vérification formulaire " onclick="forme()">
                         <input type=reset value=" effacer ">
             </table>
         </center>
 
-        <center>
-            <div id="alert">
-            </div>
-        </center>
+        
 
     </form>
     <script src="./ressource.js"></script>

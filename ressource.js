@@ -1,38 +1,75 @@
-const input= document.querySelector("#c5");
+
 const NOM = document.querySelector("#c1");
 const email   = document.querySelector("#c2");
 const postal = document.querySelector("#c3");
 const localite = document.querySelector("#c4");
-const lepays =document.querySelector("#lepays");
+
 const t2 = document.querySelector("#t2");
 const t3 = document.querySelector("#t3");
 const t4 = document.querySelector("#t4");
 
-let input1=[];
-  // ajouter une ville
+// Fonction pour sauvegarder les données du formulaire
+
+function soumettreFormulaire (){
+    const Nom = NOM.value;
+    const Email = email.value;
+    const Postale = postal.value;
+    const Localiter = localite.value;
+
+    let Formee = {
+        Nom : Nom ,
+        Email : Email,
+        Postale : Postale,
+        Localiter : Localiter,
+    }
+
+    localStorage.setItem('formulaire',Formee);
+    localStorage.getItem('form',JSON.stringify(Formee));
+}
+
+
+
+// let input1=[];
+  // ajouter une pays
+
+    
+    
+    // if(isNaN(valeurr) || valeurr.trim().length ===null || valeurr!== "" || valeur !== Number){
+    //     input1.push(valeurr);
+    //     console.log(input1);
+    // }else {
+    //     if( valeurrr === input1){
+    //         console.log("Entrer le nom d'un pays qui ne se touve pas dans la liste");
+    //     }else {
+    //         console.log("Entrer le nom d'une ville de vorte pays valide");
+    //     }
+    // }
+
 function myFunction(){
-  let valeurr = input.value;
-  
-  if(isNaN(valeurr) || valeurr.trim().length ===null || valeurr!== "" || valeur !== Number){
-    input1.push(valeurr);
-    console.log(input1);
-  }else if( valeurrr == input1){
-    console.log("Entrer le nom d'un pays qui ne se touve pas dans la liste");
-  }else {
-    console.log("Entrer le nom d'une ville de vorte pays valide");
-  }
+    const inputPays= document.getElementById('c5');
+    const selectPays = document.getElementById('lepays');
+    const SelectPays = selectPays.value.trim();
+    const InputPays= inputPays.value.trim();
+
+    for (let i= 0; i < SelectPays.options;i++){
+
+        if (SelectPays.options[i].text.toLowerCase() === inputPays.toLowerCase()) {
+            InputPays.classList.add("error");
+            inputPays = "";
+            InputPays.textContent= 'Nom invalide, le nom doit etre entre 8 et 20 caractère';
+            inputPays.style.boderColor = "red";
+            return;
+        }
+    }
+
+    let option= document.createElement("option");
+    option.text=inputPays;
+    SelectPays.add(option);
+    
+    inputPays = "";
    
 }
-function monPays(){
-    let valeurr = lepays.value;
-    if(isNaN(valeurr) || valeurr.trim().length ===null || valeurr!== "" || valeur !== Number){
-      input1.innerText(valeurr);
-      console.log(input1);
-    }else{
-      console.log("Entrer le nom d'une ville de vorte pays valide");
-    }
-     
-}
+
 
 
 
@@ -41,11 +78,12 @@ function forme(){
     verifierAdresse();
     verifierPostal();
 }
+
 function verifierNom() {
-    const nom = NOM.value;
+    const nom = NOM.value.trim();
     if(/^[A-Za-z\s]{8,20}$/.test(nom)){
         t2.textContent="";
-        NOM.style.borderColor='green';
+        NOM.style.borderColor='2px solid green';
     }else{
         t2.classList.add("error");
         t2.textContent= 'Nom invalide, le nom doit etre entre 8 et 20 caractère';
@@ -53,7 +91,7 @@ function verifierNom() {
     }
 }
 
-NOM.addEventListener('input', verifierNom);
+
 
 function verifierAdresse() {
     const Email = email.value;
@@ -69,23 +107,33 @@ function verifierAdresse() {
 
 function verifierPostal() {
     const Postal = postal.value;
-    if(Postal == 3000){
-        t4.textContent="";
-        localite.innerHTML= "Ville1";
-        postal.style.borderColor='green';
-    }else if(Postal == 4000){
-        t4.textContent="";
-        localite.innerHTML= "Ville2";
-        postal.style.borderColor='green';
-    }else{
+    if(Postal != 3000 && Postal != 4000){
         t4.classList.add("error");
-        t4.textContent= 'Erreur, il faut choisir seulemnt 3000 ou 4000';
-        postal.style.boderColor = "red";
+        t4.textContent= 'code postal invalide, entrer soit 3000 ,soit 4000';
+        
+    }else {
+        if(Postal == 3000){
+            document.querySelector("#c4").value="Ville1"  
+        }else{
+            document.querySelector("#c4").value="Ville2"
+        }
+        postal.style.borderColor='green';
     }
 }
 
-function alert(){
-    let tableau = [];
-    tableau.push(verifierNom(),verifierAdresse(),verifierPostal());
-    alert(tableau);
+function afficher() {
+    const Nom = NOM.value;
+    const Email = email.value;
+    const Postale = postal.value;
+    const Localiter = localite.value;
+    // Construction de la chaîne à afficher
+    const infoFormulaire = `Nom : ${Nom}\nEmail : ${Email}\nPostal : ${Postale}\nLocalité : ${Localiter}`;
+    alert(infoFormulaire);
+    
 }
+
+  
+
+
+
+  
